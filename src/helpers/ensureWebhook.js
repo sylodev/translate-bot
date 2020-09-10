@@ -3,7 +3,7 @@ import { webhooks } from "../config.js";
 
 export async function ensureWebhook(channel) {
   console.debug(`Ensuring webhook for channel ${channel.name}`);
-  const name = `Translate Bot #${channel.name}- don't touch!`;
+  const name = `Translate Bot #${channel.name} - don't touch!`;
   const existingWebhooks = await client.getChannelWebhooks(channel.id);
   const existingWebhook = existingWebhooks.find((webhook) => webhook.name === name);
   if (existingWebhook) {
