@@ -1,0 +1,6 @@
+# ignore everything but what we whitelist
+*
+!src
+!package.json
+!yarn.lock
+!LICENSE

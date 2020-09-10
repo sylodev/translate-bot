@@ -1,0 +1,12 @@
+{
+  "token": "TOKEN",
+  "guild": "GUILD_ID",
+  "status": "for translations",
+  "support_role": "ROLE_ID",
+  "blacklist_roles": [],
+  "channel_format": "support-(?<code>[a-z]+)",
+  "mirror": {
+    "channel_id": "CHANNEL_ID",
+    "locale": "en"
+  }
+}

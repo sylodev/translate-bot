@@ -1,0 +1,16 @@
+{
+  "name": "translate-bot",
+  "version": "0.0.1",
+  "description": "a Discord bot that translates channels between languages.",
+  "main": "src/index.js",
+  "repository": "https://github.com/sylv/translate-bot.git",
+  "author": "Ryan <ryan@sylver.me>",
+  "license": "MIT",
+  "private": false,
+  "type": "module",
+  "dependencies": {
+    "@k3rn31p4nic/google-translate-api": "k3rn31p4nic/google-translate-api",
+    "eris": "^0.13.3",
+    "rc": "^1.2.8"
+  }
+}
