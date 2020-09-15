@@ -8,9 +8,18 @@
   "license": "MIT",
   "private": false,
   "type": "module",
+  "scripts": {
+    "dev": "nodemon ./src"
+  },
   "dependencies": {
-    "@k3rn31p4nic/google-translate-api": "k3rn31p4nic/google-translate-api",
+    "@google-cloud/translate": "^6.0.2",
+    "@keyv/sqlite": "^2.0.2",
     "eris": "^0.13.3",
+    "find-up": "^5.0.0",
+    "keyv": "^4.0.1",
     "rc": "^1.2.8"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
   }
 }
