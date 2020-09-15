@@ -17,7 +17,8 @@
     "eris": "^0.13.3",
     "find-up": "^5.0.0",
     "keyv": "^4.0.1",
-    "rc": "^1.2.8"
+    "rc": "^1.2.8",
+    "url-regex": "^5.0.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"

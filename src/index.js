@@ -27,22 +27,25 @@ client.on("messageCreate", async (msg) => {
     return;
   }
 
+  const attachments = msg.attachments[0] ? ' ' + msg.attachments.map((attachment) => attachment.url).join(", ") : ""; // prettier-ignore
   if (msg.channel.id === config.mirror.channel_id) {
     const parts = msg.content.split(" ");
     const channelCode = parts.shift();
     const targetChannel = channels.get(channelCode);
     const withoutCode = parts.join(" ").trim();
-    if (!targetChannel || !withoutCode) {
+    if (!targetChannel || (!withoutCode && !msg.attachments[0])) {
       return await msg.addReaction("❓");
     }
 
     const targetChannelWebhook = webhooks.get(targetChannel.id);
     const translatedText = await translate(withoutCode, { from: config.mirror.locale, to: channelCode });
     await client.executeWebhook(targetChannelWebhook.id, targetChannelWebhook.token, {
-      content: translatedText,
+      content: translatedText + attachments,
       username: msg.author.username,
       avatarURL: msg.author.avatarURL,
     });
+
+    return;
   }
 
   const userIsSupport = msg.member.roles.includes(config.support_role);
@@ -53,7 +56,7 @@ client.on("messageCreate", async (msg) => {
   if (!channelWebhook) console.warn(`Could not get webhook for mirror ${config.mirror.channel_id}`);
   const translatedText = await translate(msg.content, { from: channelCodeFromName, to: config.mirror.locale });
   await client.executeWebhook(channelWebhook.id, channelWebhook.token, {
-    content: translatedText,
+    content: translatedText + attachments,
     username: `${msg.author.username}#${msg.author.discriminator} (${channelCodeFromName} #${msg.channel.name})`,
     avatarURL: msg.author.avatarURL,
   });
