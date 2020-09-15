@@ -13,19 +13,21 @@ const translateAPI = new googleSDK.v2.Translate({ projectId: credentials.project
 // they seemed better then what i was using
 const MARKDOWN_REGEX = /<@(!?|&?)\d+>|<#\d+>|<(\w+)?:\w+:\d+>|```(.+?|\n+)```|`(.+?|\n+)`/gis;
 const REF_REGEX = /REF__[0-9]{1,}/g;
+const SNIPPET_LENGTH = 64;
 
 export async function translate(message, targetLocale) {
   if (message.length <= 1) return message;
-  const hash = hashString(message);
+  const hash = hashString(message.toLowerCase());
+  const snippet = message.length > SNIPPET_LENGTH ? message.substring(0, SNIPPET_LENGTH) + "..." : message;
   const cacheKey = targetLocale + hash;
   const cached = await cache.get(cacheKey);
   if (cached) {
-    console.debug(`Cache hit for ${hash}`);
+    console.debug(`Cache hit for "${snippet}"`);
     return cached;
   }
 
   // google translate will utterly destroy things like mentions, emojis and codeblocks.
-  console.debug(`Translating ${hash}`);
+  console.debug(`Translating "${snippet}"`);
   let idCounter = 0;
   const markdownStore = new Map();
   const input = message.replace(MARKDOWN_REGEX, (match) => {
@@ -37,6 +39,6 @@ export async function translate(message, targetLocale) {
   const [translation] = await translateAPI.translate(input, targetLocale);
   const translatedText = translation.replace(REF_REGEX, (match) => markdownStore.get(match) ?? match);
   await cache.set(cacheKey, translatedText);
-  console.debug(`Translated ${hash}`);
+  console.debug(`Translated "${snippet}"`);
   return translatedText;
 }

@@ -18,6 +18,8 @@ jobs:
       - name: Build and Publish Image
         uses: ilteoood/docker_buildx@master
         with:
+          # temporary because otherwise builds take 20m
+          platform: linux/amd64
           publish: true
           tag: ${GITHUB_REF##*/}-${{ steps.package-version.outputs.current-version}},${GITHUB_REF##*/}
           imageName: sylver/translate-bot
