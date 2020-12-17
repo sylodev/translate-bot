@@ -60,6 +60,7 @@ client.on("messageCreate", async (msg) => {
     username: `${msg.author.username}#${msg.author.discriminator} (${channelCodeFromName} #${msg.channel.name})`,
     avatarURL: msg.author.avatarURL,
   });
+  await msg.addReaction("✅");
 });
 
 client.connect();
