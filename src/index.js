@@ -34,6 +34,8 @@ client.on("messageCreate", async (msg) => {
     const targetChannel = channels.get(channelCode);
     const withoutCode = parts.join(" ").trim();
     if (!targetChannel || (!withoutCode && !msg.attachments[0])) {
+      const isBotCommand = config.bot_prefixes.some(prefix => msg.content.startsWith(prefix));
+      if (isBotCommand) return;
       return await msg.addReaction("❓");
     }
 

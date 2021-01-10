@@ -2,6 +2,7 @@ import rc from "rc";
 export const config = rc("translatebot", {
   status: "for translations",
   blacklist_roles: [],
+  bot_prefixes: [],
   channel_format: "support-(?<code>[a-z]+)",
   mirror: {
     locale: "en",
