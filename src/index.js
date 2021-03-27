@@ -60,7 +60,7 @@ client.on("messageCreate", async (msg) => {
   const translatedText = await translate(msg.content, { from: channelCodeFromName, to: config.mirror.locale });
   await client.executeWebhook(channelWebhook.id, channelWebhook.token, {
     content: translatedText + attachments,
-    username: `${msg.author.username}#${msg.author.discriminator} (${channelCodeFromName} #${msg.channel.name})`,
+    username: `${msg.author.username} (${msg.author.id}) [${channelCodeFromName} #${msg.channel.name}]`,
     avatarURL: msg.author.avatarURL,
   });
 });
