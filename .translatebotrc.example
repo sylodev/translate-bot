@@ -3,6 +3,7 @@
   "guild": "GUILD_ID",
   "status": "for translations",
   "support_role": "ROLE_ID",
+  "bot_prefixes": ["a!", "s!"],
   "blacklist_roles": [],
   "channel_format": "support-(?<code>[a-z]+)",
   "mirror": {
