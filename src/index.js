@@ -51,8 +51,6 @@ client.on("messageCreate", async (msg) => {
     return;
   }
 
-  const userIsSupport = msg.member.roles.includes(config.support_role);
-  if (userIsSupport) return; // translating support messages back to the mirror would be wasteful
   const channelCodeFromName = config.channel_format.exec(msg.channel.name)?.groups?.code;
   if (!channelCodeFromName) return;
   const channelWebhook = webhooks.get(config.mirror.channel_id);
