@@ -34,7 +34,7 @@ client.on("messageCreate", async (msg) => {
     const targetChannel = channels.get(channelCode);
     const withoutCode = parts.join(" ").trim();
     if (!targetChannel || (!withoutCode && !msg.attachments[0])) {
-      const isBotCommand = config.bot_prefixes.some(prefix => msg.content.startsWith(prefix));
+      const isBotCommand = config.bot_prefixes.some((prefix) => msg.content.startsWith(prefix));
       if (isBotCommand) return;
       return await msg.addReaction("❓");
     }
@@ -58,7 +58,7 @@ client.on("messageCreate", async (msg) => {
   const translatedText = await translate(msg.content, { from: channelCodeFromName, to: config.mirror.locale });
   await client.executeWebhook(channelWebhook.id, channelWebhook.token, {
     content: translatedText + attachments,
-    username: `${msg.author.username} (${msg.author.id}) [${channelCodeFromName} #${msg.channel.name}]`,
+    username: `(${channelCodeFromName}) ${msg.author.username} (${msg.author.id}) [#${msg.channel.name}]`,
     avatarURL: msg.author.avatarURL,
   });
 });
