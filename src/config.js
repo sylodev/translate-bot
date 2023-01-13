@@ -3,7 +3,7 @@ export const config = rc("translatebot", {
   status: "for translations",
   blacklist_roles: [],
   bot_prefixes: [],
-  channel_format: "support-(?<code>[a-z]+)",
+  channel_format: "support-(?<code>[a-z]{2}(-[a-z]{2})?)",
   mirror: {
     locale: "en",
   },
