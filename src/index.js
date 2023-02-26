@@ -27,7 +27,7 @@ client.on("messageCreate", async (msg) => {
     return;
   }
 
-  const attachments = msg.attachments[0] ? ' ' + msg.attachments.map((attachment) => attachment.url).join(", ") : ""; // prettier-ignore
+  const attachments = msg.attachments[0] ? ' ' + msg.attachments.map((attachment) => attachment.url).join(" ") : ""; // prettier-ignore
   if (msg.channel.id === config.mirror.channel_id) {
     const parts = msg.content.split(" ");
     const channelCode = parts.shift();
