@@ -52,7 +52,7 @@ client.on("messageCreate", async (msg) => {
   }
 
   const channelCodeFromName = config.channel_format.exec(msg.channel.name)?.groups?.code;
-  if (!channelCodeFromName) return;
+  if (channelCodeFromName) {
   const channelWebhook = webhooks.get(config.mirror.channel_id);
   if (!channelWebhook) console.warn(`Could not get webhook for mirror ${config.mirror.channel_id}`);
   const translatedText = await translate(msg.content, { from: channelCodeFromName, to: config.mirror.locale });
@@ -61,6 +61,9 @@ client.on("messageCreate", async (msg) => {
     username: `(${channelCodeFromName}) ${msg.author.username} (${msg.author.id}) [#${msg.channel.name}]`,
     avatarURL: msg.author.avatarURL,
   });
+
+  return;
+  }
 });
 
 client.connect();
